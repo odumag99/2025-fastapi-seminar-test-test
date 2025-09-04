@@ -1,7 +1,9 @@
 import fastapi
 from fastapi import HTTPException
-from dto_example import CreateUserRequest, UserResponse
+from src.dto import CreateUserRequest, UserResponse
 from fastapi import Query
+from pydantic import field_validator
+import re
 
 app = fastapi.FastAPI()
 
@@ -27,7 +29,7 @@ def create_user(request: CreateUserRequest) -> UserResponse:
 def get_user(user_id: int) -> UserResponse:
     user = user_db.get(user_id)
     if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        return {"error": "User not found"}
     return UserResponse(
         user_id=user_id,
         name=user.name,
