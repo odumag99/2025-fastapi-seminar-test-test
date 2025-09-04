@@ -16,7 +16,10 @@ def create_user(request: CreateUserRequest) -> UserResponse:
 
 
 @app.get("/api/user/{user_id}")
-def get_user(user_id: int) -> UserResponse:
+def get_user(
+    # Todo
+    
+) -> UserResponse:
     # Todo
 
     return 0
@@ -24,8 +27,8 @@ def get_user(user_id: int) -> UserResponse:
 
 @app.get("/api/user/")
 def get_users(
-    min_height: int = Query(...),
-    max_height: int = Query(...)
+    # Todo
+
 ) -> list[UserResponse]:
     # Todo
 
