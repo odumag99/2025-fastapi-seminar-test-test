@@ -1,5 +1,4 @@
 import fastapi
-from fastapi import HTTPException
 from src.dto import CreateUserRequest, UserResponse
 from fastapi import Query
 

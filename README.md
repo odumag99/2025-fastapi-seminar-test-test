@@ -16,6 +16,7 @@
     - `uv venv` 명령어를 통해 가상환경을 생성합니다
     - `uv sync` 명령어를 입력하면 uv.lock에 명시된 패키지들이 가상환경에 생성됩니다.
     - `source .venv/bin/activate` 명령어를 통해 가상환경을 활성화시킵니다.
+    - 또는 `uv run <실행할 명령어>` 식의 명령어를 통해 가상환경을 활성화시키지 않고 작동시키는 방법도 있습니다.
 
 ## 과제 요구사항 
 
@@ -56,7 +57,7 @@
 ### 1. 회원 정보 등록 API
 `POST /api/user`
 
-사용자의 프로필 정보를 받아 등록하는 API입니다. user_id는 생성되는 시점을 기준으로 하여 1부터 시작하여 1씩 증가하는 방식입니다.
+사용자의 프로필 정보를 받아 등록하는 API입니다. 사용자 등록 시 user_id는 1부터 시작해 순차적으로 증가합니다.
 
 **요청 본문 (Request Body)** 은 JSON 형식이며, 다음 필드를 포함해야 합니다.
 
@@ -76,6 +77,7 @@
   "height": 175.5,
   "bio": "안녕하세요"
 }
+```
 
 **성공 응답 (Success Response)**
 
@@ -95,11 +97,13 @@
 
 **실패 응답 (Error Response)**
 
-필수 필드가 누락되거나, 데이터 형식이 잘못된 경우 422 Unprocessable Entity를 반환하도록 합니다. 따로 처리를 할 필요는 없고, Pydantic 모델의 유효성 검사를 통과하지 못했을 때 422 Unprocessable Entity가 발생합니다.
+- 필수 필드가 누락되거나, 데이터 형식이 잘못된 경우 422 Unprocessable Entity를 반환하도록 합니다. 따로 처리를 할 필요는 없고, Pydantic 모델의 유효성 검사를 통과하지 못했을 때 422 Unprocessable Entity가 발생합니다.
 
-phone_number 형식이 올바르지 않거나(010-XXXX-XXXX 형태), bio의 길이가 500자를 초과하는 경우 400 Bad Request 상태 코드와 함께 적절한 에러 메시지를 반환합니다.
+- phone_number 형식이 올바르지 않거나(010-XXXX-XXXX 형태), bio의 길이가 500자를 초과하는 경우 적절한 메시지와 함께 ValueError를 raise하도록 합니다.
 
-(힌트) phone_number 형식을 검증하기 위해서 python 내장 모듈인 re 모듈을 사용해 보세요.
+(힌트) 
+- pydantic의 모델 내에서 특정 필드 값을 검증하기 위해서 field_validator 데코레이터를 사용해보세요.
+- phone_number 형식을 검증하기 위해서 python 내장 모듈인 re 모듈을 사용해 보세요.
 
 ### 2. 특정 회원 정보 조회 API
 `GET /api/user/{user_id}`
@@ -108,13 +112,11 @@ user_id를 Path Parameter로 받아 특정 회원의 정보를 반환하는 API�
 
 **성공 응답 (Success Response)**
 
-200 OK 상태 코드를 반환합니다.
-
 응답 본문은 해당 user_id를 가진 사용자의 전체 정보(회원 등록 API의 성공 응답과 동일한 DTO)를 포함해야 합니다.
 
 **실패 응답 (Error Response)**
 
-해당 user_id를 가진 사용자가 존재하지 않을 경우, 404 Not Found 상태 코드를 반환하세요.
+해당 user_id를 가진 사용자가 존재하지 않을 경우, 적절한 메세지와 함께 ValueError을 raise하도록 합니다.
 
 ### 3. 키(height)로 회원 필터링 API
 `GET /api/user`
@@ -126,8 +128,6 @@ min_height와 max_height를 Query Parameter로 받습니다.
 예시: /api/user?min_height=170&max_height=180
 
 **성공 응답 (Success Response)**
-
-200 OK 상태 코드를 반환합니다.
 
 min_height 이상, max_height 이하의 키를 가진 모든 사용자의 정보가 다음과 같은 리스트 형태로 반환되어야 합니다.
 
