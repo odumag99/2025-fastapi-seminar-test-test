@@ -2,7 +2,6 @@ from pydantic import BaseModel, field_validator
 import re
 
 class CreateUserRequest(BaseModel):
-    # Todo
     name: str
     phone_number: str
     bio: str | None = None
@@ -21,7 +20,6 @@ class CreateUserRequest(BaseModel):
         return v
 
 class UserResponse(BaseModel):
-    # Todo
     user_id: int
     name: str
     phone_number: str
