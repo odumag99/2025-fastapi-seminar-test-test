@@ -14,11 +14,11 @@ class CreateUserRequest(BaseModel):
             raise ValueError("Invalid phone number format. Must be 010-XXXX-XXXX.")
         return v
 
-@field_validator('bio')
-def validate_bio(cls, v):
-    if v and len(v) > 500:
-        raise ValueError("Bio must be 500 characters or less.")
-    return v
+    @field_validator('bio')
+    def validate_bio(cls, v):
+        if v and len(v) > 500:
+            raise ValueError("Bio must be 500 characters or less.")
+        return v
 
 class UserResponse(BaseModel):
     # Todo
