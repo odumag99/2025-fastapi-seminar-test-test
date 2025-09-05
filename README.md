@@ -12,7 +12,7 @@
 
 - 모든 과제는 python 3.12 버전을 사용할 것을 전제로 합니다.
 - 앞으로 과제에서는 파이썬 패키지 매니저인 uv를 이용하여 가상환경을 생성합니다
-    - `pip install uv` 를 통해 uv를 설치한 후 `uv python install 3.12` 명령어로 python 3.11 버전을 설치합니다.
+    - `pip install uv` 를 통해 uv를 설치한 후 `uv python install 3.12` 명령어로 python 3.12 버전을 설치합니다.
     - `uv venv` 명령어를 통해 가상환경을 생성합니다
     - `uv sync` 명령어를 입력하면 uv.lock에 명시된 패키지들이 가상환경에 생성됩니다.
     - `source .venv/bin/activate` 명령어를 통해 가상환경을 활성화시킵니다.
