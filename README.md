@@ -1,6 +1,6 @@
 # FastAPI 세미나 과제 1
 
-본 과제에서는 세미나에서 배우지 않은 내용이 나올 수 있습니다. 과제를 수행하면서 모르는 부분이 있으면 AI에게 물어보거나 검색을 통해 스스로 해결해보세요. 단 AI에게 생성을 요청하지는 말아주세요. 또는 #fastpi-잡담 채널에서 질문해도 좋습니다. 답을 알려드리는 않지만 방향을 잡아드릴 수 있습니다.
+본 과제에서는 세미나에서 배우지 않은 내용이 나올 수 있습니다. 과제를 수행하면서 모르는 부분이 있으면 AI에게 물어보거나 검색을 통해 스스로 해결해보세요. 단 AI에게 생성을 요청하지는 말아주세요. 또는 #fastapi-잡담 채널에서 질문해도 좋습니다. 답을 알려드리지는 않지만 방향을 잡아드릴 수 있습니다.
 
 ## 과제 목표
 
@@ -24,7 +24,7 @@
 
 데이터베이스를 아직 배우지 않았기 때문에, 이번 과제에서는 In-memory 방식으로 데이터를 저장하고 관리합니다. (즉, 서버를 껐다 켜면 데이터가 초기화됩니다.)
 
-데이터베이스 대신에 user_db를 이용하고 user_db에 다음과 같은 형식으로 저장됩니다.
+데이터베이스 대신에 파이썬 딕셔너리(`user_db`)를 이용하고 `user_db`에 다음과 같은 형식으로 저장됩니다.
 
 ```JSON
 {
@@ -45,7 +45,7 @@
     "phone_number": "010-1234-5678",
     "height": 175.5,
     "bio": "안녕하세요"
-  }
+  },
   2: {
     "name": "이서버",
     "phone_number": "010-1111-2222",
@@ -55,7 +55,7 @@
 ```
 
 ### 1. 회원 정보 등록 API
-`POST /api/user`
+`POST /api/users`
 
 사용자의 프로필 정보를 받아 등록하는 API입니다. 사용자 등록 시 user_id는 1부터 시작해 순차적으로 증가합니다.
 
@@ -106,7 +106,7 @@
 - phone_number 형식을 검증하기 위해서 python 내장 모듈인 re 모듈을 사용해 보세요.
 
 ### 2. 특정 회원 정보 조회 API
-`GET /api/user/{user_id}`
+`GET /api/users/{user_id}`
 
 user_id를 Path Parameter로 받아 특정 회원의 정보를 반환하는 API입니다.
 
@@ -119,13 +119,13 @@ user_id를 Path Parameter로 받아 특정 회원의 정보를 반환하는 API�
 해당 user_id를 가진 사용자가 존재하지 않을 경우, 적절한 메세지와 함께 ValueError을 raise하도록 합니다.
 
 ### 3. 키(height)로 회원 필터링 API
-`GET /api/user`
+`GET /api/users`
 
 사용자의 키(height)를 기준으로 필터링하여 조건에 맞는 사용자 목록을 반환하는 API입니다.
 
 min_height와 max_height를 Query Parameter로 받습니다.
 
-예시: /api/user?min_height=170&max_height=180
+예시: /api/users?min_height=170&max_height=180
 
 **성공 응답 (Success Response)**
 
