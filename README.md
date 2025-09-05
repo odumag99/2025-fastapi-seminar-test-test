@@ -31,7 +31,7 @@
     "user_id": {
         "name": "string",
         "phone_number": "string",
-        "height": "int",
+        "height": "float",
         "bio": "string"
     }
 }
