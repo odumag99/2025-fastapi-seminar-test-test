@@ -7,14 +7,14 @@ app = fastapi.FastAPI()
 user_db = {}
 
 
-@app.post("/api/user")
+@app.post("/api/users")
 def create_user(request: CreateUserRequest) -> UserResponse:
     # Todo
 
     return 0
 
 
-@app.get("/api/user/{user_id}")
+@app.get("/api/users/{user_id}")
 def get_user(
     # Todo
     
@@ -24,7 +24,7 @@ def get_user(
     return 0
 
 
-@app.get("/api/user/")
+@app.get("/api/users")
 def get_users(
     # Todo
 
