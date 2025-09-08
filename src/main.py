@@ -29,7 +29,7 @@ def create_user(request: CreateUserRequest) -> UserResponse:
 def get_user(user_id: int) -> UserResponse:
     user = user_db.get(user_id)
     if user is None:
-        return ValueError("User not found")
+        raise ValueError("User not found")
     return UserResponse(
         user_id=user_id,
         name=user.name,
