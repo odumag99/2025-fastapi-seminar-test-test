@@ -1,0 +1,42 @@
+import pytest
+
+from src.dto import CreateUserRequest
+from src.main import user_db
+
+@pytest.fixture
+def user_list() -> dict[int, dict]:
+    user_db.clear()
+    
+    for i in range(20):
+        user_db[i] = {
+            "name": f"이름{i}",
+            "phone_number": f"010-1234-0000",
+            "height": (165.3+i)
+        }
+        
+    return user_db
+
+@pytest.fixture
+def create_user_req() -> CreateUserRequest:
+    return CreateUserRequest(
+        name="김와플",
+        phone_number="010-1234-5678",
+        height=175.5
+    )
+    
+@pytest.fixture
+def create_user_req_with_bio() -> CreateUserRequest:
+    return CreateUserRequest(
+        name="이와플",
+        phone_number="010-1111-2222",
+        height=182.5,
+        bio="안녕하세요"
+    )
+    
+@pytest.fixture
+def create_user_req_invalid_number() -> dict[str, str | float]:
+    return {
+        "name":"김와플",
+        "phone_number":"01012341234",
+        "height":181.5
+    }
