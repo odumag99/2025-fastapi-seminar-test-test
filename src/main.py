@@ -26,7 +26,7 @@ def create_user(request: CreateUserRequest) -> UserResponse:
 
 
 @app.get("/api/users/{user_id}", status_code=status.HTTP_200_OK)
-def get_user(user_id: int) -> UserResponse:
+def get_user_by_id(user_id: int) -> UserResponse:
     user = user_db.get(user_id)
     if user is None:
         raise ValueError("User not found")
