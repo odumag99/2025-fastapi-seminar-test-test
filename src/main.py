@@ -1,4 +1,6 @@
 import fastapi
+
+from fastapi import status
 from src.dto import CreateUserRequest, UserResponse
 from fastapi import Query
 
@@ -8,7 +10,7 @@ app = fastapi.FastAPI()
 user_db = {}
 
 
-@app.post("/api/users")
+@app.post("/api/users", status_code=status.HTTP_201_CREATED)
 def create_user(request: CreateUserRequest) -> UserResponse:
     user_id = len(user_db) + 1
     user_db[user_id] = request
@@ -23,7 +25,7 @@ def create_user(request: CreateUserRequest) -> UserResponse:
 
 
 
-@app.get("/api/users/{user_id}")
+@app.get("/api/users/{user_id}", status_code=status.HTTP_200_OK)
 def get_user(user_id: int) -> UserResponse:
     user = user_db.get(user_id)
     if user is None:
@@ -37,7 +39,7 @@ def get_user(user_id: int) -> UserResponse:
     )
 
 
-@app.get("/api/users")
+@app.get("/api/users", status_code=status.HTTP_200_OK)
 def get_user(
     min_height: int = Query(...),
     max_height: int = Query(...)
