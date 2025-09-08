@@ -5,7 +5,7 @@ class CreateUserRequest(BaseModel):
     name: str
     phone_number: str
     bio: str | None = None
-    height: int
+    height: float
     
     @field_validator('phone_number')
     def validate_phone_number(cls, v):
@@ -24,4 +24,4 @@ class UserResponse(BaseModel):
     name: str
     phone_number: str
     bio: str | None = None
-    height: int
+    height: float
