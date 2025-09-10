@@ -20,7 +20,7 @@ def test_create_user(
     assert res_dto.name == create_user_req.name
     assert res_dto.phone_number == create_user_req.phone_number
     assert res_dto.height == create_user_req.height
-    
+
 def test_create_user_with_bio(
     create_user_req_with_bio: CreateUserRequest
 ):
@@ -41,6 +41,22 @@ def test_create_user_invalid_number(
     
     assert res.status_code == 422
 
+# 이름 없을 때
+
+# Phone_number 없을 때
+
+# Phone_number 형식 틀릴 때
+
+# phone_number가 int로 주어졌을 때
+
+# height가 없을 때
+
+# height가 str으로 주어졌을 때
+
+# bio가 500자를 넘을 때
+
+# 두 가지 이상의 조건을 만족하지 못할 때
+
 # Test for get user by id
 
 def test_create_and_get_user_by_id(
@@ -58,7 +74,9 @@ def test_create_and_get_user_by_id(
     assert res_dto.phone_number == create_user_req.phone_number
     assert res_dto.height == create_user_req.height
     
-    
+
+# 없는 id로 조회할 때
+
 # Test for get users with query string
 
 def test_get_users(
@@ -84,3 +102,5 @@ def test_get_users_with_query(
     
     for user in list_response:
         assert (user.height >= 177 and user.height <= 182)
+
+# 조건 만족시키는 user가 없을 때
