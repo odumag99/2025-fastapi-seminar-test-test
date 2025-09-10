@@ -38,8 +38,8 @@ def get_user_by_id(user_id: int) -> UserResponse:
 
 @app.get("/api/users", status_code=status.HTTP_200_OK)
 def get_user(
-    min_height: int = Query(...),
-    max_height: int = Query(...)
+    min_height: float = Query(...),
+    max_height: float = Query(...)
 ) -> list[UserResponse]:
     users = [
         UserResponse(
