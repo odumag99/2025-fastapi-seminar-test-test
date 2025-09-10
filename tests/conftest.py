@@ -7,7 +7,7 @@ from src.main import user_db
 def user_list() -> dict[int, dict]:
     user_db.clear()
     
-    for i in range(20):
+    for i in range(1, 21):
         user_db[i] = {
             "name": f"이름{i}",
             "phone_number": f"010-1234-0000",
